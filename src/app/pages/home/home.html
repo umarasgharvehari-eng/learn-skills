@@ -1,0 +1,121 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="pill">🎯 Skill-based learning • 🚀 Career focused</div>
+      <h1>{{ title }}</h1>
+      <p class="muted">{{ subtitle }}</p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#courses">📚 Explore Courses</a>
+        <a class="btn glass" href="#contact">💬 Get Guidance</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat" *ngFor="let s of stats">
+          <div class="stat-ico">{{ s.icon }}</div>
+          <div>
+            <div class="stat-val">{{ s.value }}</div>
+            <div class="stat-lbl">{{ s.label }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="feature-card">
+        <div class="feature-title">✨ What you get</div>
+        <ul class="feature-list">
+          <li>✅ Live + recorded sessions</li>
+          <li>🛠️ Real-world projects</li>
+          <li>🧑‍🏫 Mentor feedback</li>
+          <li>📄 CV + Portfolio support</li>
+          <li>🎓 Certificate</li>
+        </ul>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini" *ngFor="let t of tracks" [class]="t.colorClass">
+          <div class="mini-ico">{{ t.icon }}</div>
+          <div class="mini-txt">{{ t.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="courses" class="section">
+  <div class="section-head">
+    <h2>Popular Courses 🚀</h2>
+
+    <div class="filters">
+      <button class="chip" [class.active]="selectedTrack==='All'" (click)="setTrack('All')">
+        🌍 All
+      </button>
+      <button
+        class="chip"
+        *ngFor="let t of tracks"
+        [class.active]="selectedTrack===t.name"
+        (click)="setTrack(t.name)"
+      >
+        {{ t.icon }} {{ t.name }}
+      </button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card" *ngFor="let c of filteredCourses">
+      <div class="card-top">
+        <div class="icon">{{ c.icon }}</div>
+        <div class="meta">
+          <div class="card-title">{{ c.title }}</div>
+          <div class="card-sub muted">{{ c.desc }}</div>
+        </div>
+      </div>
+
+      <div class="card-badges">
+        <span [class]="badgeClass(c.level)">{{ c.level }}</span>
+        <span class="badge badge-gray">⏱️ {{ c.duration }}</span>
+        <span class="badge badge-yellow">{{ stars(c.rating) }} {{ c.rating }}</span>
+      </div>
+
+      <div class="tags">
+        <span class="tag" *ngFor="let t of c.tags">#{{ t }}</span>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn small primary">✅ Enroll</button>
+        <button class="btn small outline">📌 Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <h2>Student Success Stories 💙</h2>
+
+  <div class="grid">
+    <div class="card" *ngFor="let t of testimonials">
+      <div class="quote">“{{ t.quote }}”</div>
+      <div class="t-row">
+        <div class="avatar">👤</div>
+        <div>
+          <div class="t-name">{{ t.name }}</div>
+          <div class="muted">{{ t.role }} • {{ '⭐'.repeat(t.stars) }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <h2>Contact & Guidance 💬</h2>
+  <p class="muted">
+    Need help choosing a course? Message us and we’ll guide you.
+  </p>
+
+  <div class="contact-box">
+    <div>📧 Email: <b>support@learnskills.com</b></div>
+    <div>📱 WhatsApp: <b>+92-XXX-XXXXXXX</b></div>
+    <div>📍 Location: <b>Pakistan</b></div>
+  </div>
+</section>
