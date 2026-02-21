@@ -4,26 +4,14 @@ import { CommonModule } from '@angular/common';
 type Level = 'Beginner' | 'Intermediate' | 'Advanced';
 
 type Course = {
-  slug: string;
   title: string;
   desc: string;
   level: Level;
   duration: string;
   icon: string;
-  tags: string[];
   rating: number;
   students: number;
 };
-
-type Plan = {
-  name: string;
-  price: string;
-  note: string;
-  features: string[];
-  highlight?: boolean;
-};
-
-type FAQ = { q: string; a: string };
 
 @Component({
   selector: 'app-home',
@@ -33,241 +21,136 @@ type FAQ = { q: string; a: string };
   styleUrl: './home.scss',
 })
 export class Home {
-  brand = 'LearnSkills';
 
   heroTitle = 'Learn Skills. Build Your Future.';
   heroSubtitle =
-    'Career-focused learning with real projects, mentor feedback, and a clear roadmap — start from zero and become job-ready. 🚀';
-
-  stats = [
-    { label: 'Students', value: '12,500+', icon: '👩‍🎓' },
-    { label: 'Courses', value: '45+', icon: '📚' },
-    { label: 'Mentors', value: '18', icon: '🧑‍🏫' },
-    { label: 'Hiring Partners', value: '30+', icon: '🤝' },
-  ];
-
-  tracks = [
-    { name: 'All', icon: '🌍' },
-    { name: 'Web Development', icon: '💻' },
-    { name: 'Design', icon: '🎨' },
-    { name: 'Marketing', icon: '📈' },
-    { name: 'Freelancing', icon: '🧾' },
-  ];
-
-  selectedTrack = 'All';
+    'Professional skill-based programs designed to help you build a strong portfolio, grow your career, and succeed in the digital world.';
 
   courses: Course[] = [
     {
-      slug: 'angular',
       title: 'Angular Web Development',
-      desc: 'Components, routing, APIs, authentication, and deployment — build real apps.',
+      desc: 'Master Angular, build real-world apps, authentication systems, dashboards, and deploy live projects.',
       level: 'Intermediate',
       duration: '6 Weeks',
       icon: '⚡',
-      tags: ['Angular', 'TypeScript', 'Projects'],
       rating: 4.8,
       students: 3200,
     },
     {
-      slug: 'frontend-basics',
-      title: 'HTML, CSS & Responsive UI',
-      desc: 'Modern layouts, Flexbox/Grid, animations, accessibility, and mobile-first design.',
+      title: 'Complete Frontend Development',
+      desc: 'HTML, CSS, JavaScript, responsive design, animations, and UI best practices.',
       level: 'Beginner',
-      duration: '4 Weeks',
-      icon: '🧱',
-      tags: ['HTML', 'CSS', 'Responsive'],
+      duration: '8 Weeks',
+      icon: '💻',
       rating: 4.7,
-      students: 4100,
+      students: 4500,
     },
     {
-      slug: 'graphic-design',
-      title: 'Graphic Design Bootcamp',
-      desc: 'Branding, thumbnails, social media designs, and a strong portfolio.',
+      title: 'React Fundamentals',
+      desc: 'Learn React hooks, state management, reusable components, and API integration.',
+      level: 'Intermediate',
+      duration: '6 Weeks',
+      icon: '⚛️',
+      rating: 4.6,
+      students: 2700,
+    },
+    {
+      title: 'Node.js Backend Development',
+      desc: 'Build REST APIs, authentication systems, databases, and server deployment.',
+      level: 'Advanced',
+      duration: '7 Weeks',
+      icon: '🖥️',
+      rating: 4.7,
+      students: 1900,
+    },
+    {
+      title: 'Graphic Design Mastery',
+      desc: 'Branding, social media creatives, thumbnails, UI mockups, and portfolio building.',
       level: 'Beginner',
       duration: '5 Weeks',
-      icon: '✨',
-      tags: ['Design', 'Portfolio', 'Tools'],
-      rating: 4.6,
+      icon: '🎨',
+      rating: 4.5,
+      students: 3100,
+    },
+    {
+      title: 'Digital Marketing & SEO',
+      desc: 'SEO, paid ads, analytics, and growth marketing strategies.',
+      level: 'Intermediate',
+      duration: '6 Weeks',
+      icon: '📈',
+      rating: 4.4,
       students: 2200,
     },
     {
-      slug: 'digital-marketing',
-      title: 'Digital Marketing + SEO',
-      desc: 'SEO basics, content strategy, ads, and analytics to grow any business.',
-      level: 'Intermediate',
-      duration: '5 Weeks',
-      icon: '🚀',
-      tags: ['SEO', 'Ads', 'Analytics'],
-      rating: 4.5,
-      students: 1800,
-    },
-    {
-      slug: 'freelancing',
-      title: 'Freelancing Masterclass',
-      desc: 'Upwork/Fiverr profile, proposals, pricing, client communication, and delivery system.',
+      title: 'Freelancing Bootcamp',
+      desc: 'Learn Upwork, Fiverr, client communication, proposals, and pricing strategy.',
       level: 'Beginner',
-      duration: '3 Weeks',
+      duration: '4 Weeks',
       icon: '🧾',
-      tags: ['Upwork', 'Fiverr', 'Clients'],
       rating: 4.6,
-      students: 2900,
+      students: 3800,
     },
     {
-      slug: 'advanced-frontend',
-      title: 'Advanced Frontend Portfolio Projects',
-      desc: 'Build 3 portfolio-grade apps: dashboard, e-commerce, and a booking system.',
-      level: 'Advanced',
+      title: 'UI/UX Design Professional',
+      desc: 'User research, wireframing, prototyping, and usability testing.',
+      level: 'Intermediate',
       duration: '6 Weeks',
       icon: '🧠',
-      tags: ['Portfolio', 'Architecture', 'Performance'],
       rating: 4.7,
-      students: 900,
+      students: 1500,
+    },
+    {
+      title: 'Full Stack Development',
+      desc: 'Frontend + Backend + Database integration with complete deployment.',
+      level: 'Advanced',
+      duration: '10 Weeks',
+      icon: '🚀',
+      rating: 4.9,
+      students: 1100,
     },
   ];
 
-  roadmap = [
+  benefits = [
+    'Real-world projects in every course',
+    'Industry-experienced mentors',
+    'Portfolio & CV building guidance',
+    'Freelancing & job interview preparation',
+    'Lifetime community access',
+    'Certificate upon completion'
+  ];
+
+  testimonials = [
     {
-      step: '01',
-      title: 'Choose a Track',
-      desc: 'Select your path: Web Dev, Design, Marketing, or Freelancing.',
-      icon: '🧭',
+      name: 'Ayesha Khan',
+      text: 'This platform completely changed my career path. I got my first freelance client within 2 months!',
     },
     {
-      step: '02',
-      title: 'Learn with Projects',
-      desc: 'Each module includes hands-on tasks and a real capstone project.',
-      icon: '🛠️',
+      name: 'Hassan Ali',
+      text: 'The structured roadmap and projects helped me land a frontend developer job.',
     },
     {
-      step: '03',
-      title: 'Build Your Portfolio',
-      desc: 'Create a portfolio, polish your GitHub, and prepare a strong CV.',
-      icon: '📁',
-    },
-    {
-      step: '04',
-      title: 'Become Job Ready',
-      desc: 'Interview prep, mock interviews, and freelancing guidance included.',
-      icon: '🎯',
+      name: 'Umar Farooq',
+      text: 'Mentor support was amazing. Highly recommended for beginners.',
     },
   ];
 
-  plans: Plan[] = [
+  faqs = [
     {
-      name: 'Starter',
-      price: 'Free',
-      note: 'Perfect to begin',
-      features: [
-        '✅ Access to 5 intro lessons',
-        '✅ Community support',
-        '✅ Learning roadmap',
-        '❌ Mentor feedback',
-      ],
-    },
-    {
-      name: 'Pro',
-      price: 'Rs 4,999',
-      note: 'Most popular',
-      highlight: true,
-      features: [
-        '✅ Full course access',
-        '✅ Projects + templates',
-        '✅ Mentor feedback',
-        '✅ Certificate',
-        '✅ Priority support',
-      ],
-    },
-    {
-      name: 'Career',
-      price: 'Rs 9,999',
-      note: 'Job-ready pack',
-      features: [
-        '✅ Everything in Pro',
-        '✅ Portfolio review',
-        '✅ CV + LinkedIn optimization',
-        '✅ Mock interviews',
-        '✅ Internship guidance',
-      ],
-    },
-  ];
-
-  faqs: FAQ[] = [
-    {
-      q: 'Is this suitable for beginners?',
-      a: 'Yes. Start from the Starter roadmap — everything is step-by-step and beginner-friendly.',
-    },
-    {
-      q: 'Are classes live or recorded?',
-      a: 'Both. You get live sessions plus recordings you can replay anytime.',
+      q: 'Are the courses beginner friendly?',
+      a: 'Yes, most programs start from fundamentals and gradually move to advanced topics.',
     },
     {
       q: 'Do I get a certificate?',
-      a: 'Certificates are included in the Pro and Career plans.',
+      a: 'Yes, certificates are awarded after successful completion of the program.',
     },
     {
-      q: 'Do you help with freelancing?',
-      a: 'Yes. We cover proposals, profile optimization, client handling, and delivery workflow.',
+      q: 'Is there mentor support?',
+      a: 'Yes, all paid plans include mentor feedback and guidance.',
+    },
+    {
+      q: 'Can I get help with freelancing?',
+      a: 'Yes, we guide you step-by-step in building your freelancing career.',
     },
   ];
 
-  openFAQIndex: number | null = 0;
-
-  setTrack(track: string) {
-    this.selectedTrack = track;
-  }
-
-  get filteredCourses(): Course[] {
-    if (this.selectedTrack === 'All') return this.courses;
-
-    const t = this.selectedTrack.toLowerCase();
-
-    if (t.includes('web')) {
-      return this.courses.filter(
-        c =>
-          c.title.toLowerCase().includes('angular') ||
-          c.title.toLowerCase().includes('frontend') ||
-          c.tags.join(' ').toLowerCase().includes('typescript')
-      );
-    }
-    if (t.includes('design')) {
-      return this.courses.filter(
-        c => c.title.toLowerCase().includes('design') || c.tags.join(' ').toLowerCase().includes('design')
-      );
-    }
-    if (t.includes('marketing')) {
-      return this.courses.filter(
-        c => c.title.toLowerCase().includes('marketing') || c.tags.join(' ').toLowerCase().includes('seo')
-      );
-    }
-    if (t.includes('freelancing')) {
-      return this.courses.filter(
-        c =>
-          c.title.toLowerCase().includes('freelanc') ||
-          c.tags.join(' ').toLowerCase().includes('fiverr') ||
-          c.tags.join(' ').toLowerCase().includes('upwork')
-      );
-    }
-    return this.courses;
-  }
-
-  badgeClass(level: Level) {
-    return level === 'Beginner'
-      ? 'badge badge-green'
-      : level === 'Intermediate'
-      ? 'badge badge-blue'
-      : 'badge badge-orange';
-  }
-
-  stars(rating: number) {
-    const full = Math.max(1, Math.min(5, Math.round(rating)));
-    return '⭐'.repeat(full);
-  }
-
-  toggleFAQ(i: number) {
-    this.openFAQIndex = this.openFAQIndex === i ? null : i;
-  }
-
-  scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  }
 }
