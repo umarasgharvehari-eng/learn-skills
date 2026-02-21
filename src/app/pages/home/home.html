@@ -1,66 +1,252 @@
+<!-- HERO -->
 <section class="hero">
-  <div class="wrap">
-    <h1>{{ heroTitle }}</h1>
-    <p class="subtitle">{{ heroSubtitle }}</p>
-  </div>
-</section>
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <div class="pill">🎯 Project-based learning • 🧑‍🏫 Mentor support • 📁 Portfolio building</div>
 
-<section class="section">
-  <div class="wrap">
-    <h2>Our Courses</h2>
-    <div class="grid">
-      <div class="card" *ngFor="let c of courses">
-        <div class="icon">{{ c.icon }}</div>
-        <h3>{{ c.title }}</h3>
-        <p>{{ c.desc }}</p>
-        <div class="meta">
-          <span>{{ c.level }}</span>
-          <span>{{ c.duration }}</span>
-          <span>⭐ {{ c.rating }}</span>
-          <span>👥 {{ c.students }}</span>
+      <h1>{{ heroTitle }}</h1>
+      <p class="subtitle">{{ heroSubtitle }}</p>
+
+      <div class="hero-actions">
+        <button class="btn primary" (click)="scrollTo('courses')">📚 {{ primaryCTA }}</button>
+        <button class="btn outline" (click)="scrollTo('contact')">💬 {{ secondaryCTA }}</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat" *ngFor="let s of stats">
+          <div class="stat-ico">{{ s.icon }}</div>
+          <div>
+            <div class="stat-val">{{ s.value }}</div>
+            <div class="stat-lbl">{{ s.label }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust">
+        <span>✅ Certificate</span>
+        <span>✅ Portfolio Projects</span>
+        <span>✅ Career Guidance</span>
+        <span>✅ Community Support</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="glass-card">
+        <div class="glass-title">✨ What you will build</div>
+        <div class="glass-list">
+          <div class="glass-item">📊 Admin Dashboard</div>
+          <div class="glass-item">🛒 E-Commerce UI + Cart</div>
+          <div class="glass-item">🔐 Login + Authentication</div>
+          <div class="glass-item">🚀 Deploy to GitHub Pages</div>
+        </div>
+      </div>
+
+      <div class="track-box">
+        <div class="track-title">Choose a Track</div>
+        <div class="track-grid">
+          <button
+            class="chip"
+            *ngFor="let t of tracks"
+            [class.active]="selectedTrack===t.name"
+            (click)="setTrack(t.name)"
+          >
+            {{ t.icon }} {{ t.name }}
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section alt">
+<!-- OUTCOMES -->
+<section class="section">
   <div class="wrap">
-    <h2>Why Choose LearnSkills?</h2>
-    <ul class="benefits">
-      <li *ngFor="let b of benefits">✅ {{ b }}</li>
-    </ul>
+    <div class="section-head">
+      <div>
+        <h2>What You Will Achieve 🎯</h2>
+        <p class="muted">Clear outcomes that help you build confidence and progress faster.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card" *ngFor="let o of outcomes">
+        <div class="icon big">{{ o.icon }}</div>
+        <div class="card-title">{{ o.title }}</div>
+        <div class="muted">{{ o.desc }}</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- COURSES -->
+<section class="section alt" id="courses">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Our Courses 🚀</h2>
+        <p class="muted">Pick your path and start learning with real projects.</p>
+      </div>
+      <div class="mini-cta">
+        <span class="muted">Need help selecting?</span>
+        <button class="btn small primary" (click)="scrollTo('contact')">Talk to us 💬</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card course" *ngFor="let c of filteredCourses">
+        <div class="course-top">
+          <div class="course-ico">{{ c.icon }}</div>
+          <div>
+            <div class="card-title">{{ c.title }}</div>
+            <div class="muted">{{ c.desc }}</div>
+          </div>
+        </div>
+
+        <div class="badges">
+          <span [class]="badgeClass(c.level)">{{ c.level }}</span>
+          <span class="badge badge-gray">⏱️ {{ c.duration }}</span>
+          <span class="badge badge-yellow">{{ stars(c.rating) }} {{ c.rating }}</span>
+          <span class="badge badge-gray">👥 {{ c.students | number }}</span>
+        </div>
+
+        <div class="bullet">
+          <div class="bullet-title">✅ You will learn</div>
+          <ul class="bullet-list">
+            <li *ngFor="let h of c.highlights">✨ {{ h }}</li>
+          </ul>
+        </div>
+
+        <div class="actions">
+          <button class="btn small primary">✅ Enroll</button>
+          <button class="btn small outline">📌 View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
 <section class="section">
   <div class="wrap">
-    <h2>Student Testimonials</h2>
+    <div class="section-head">
+      <div>
+        <h2>Learning Experience 📚</h2>
+        <p class="muted">A structured system designed for real progress — not random tutorials.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card" *ngFor="let c of curriculum">
+        <div class="icon big">{{ c.icon }}</div>
+        <div class="card-title">{{ c.title }}</div>
+        <div class="muted">{{ c.desc }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Success Stories 💙</h2>
+        <p class="muted">Real feedback from students learning and building careers.</p>
+      </div>
+    </div>
+
     <div class="grid">
       <div class="card" *ngFor="let t of testimonials">
-        <p>"{{ t.text }}"</p>
-        <strong>- {{ t.name }}</strong>
+        <div class="quote">“{{ t.quote }}”</div>
+        <div class="t-row">
+          <div class="avatar">👤</div>
+          <div>
+            <div class="t-name">{{ t.name }}</div>
+            <div class="muted">{{ t.role }} • {{ stars(t.stars) }}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Pricing 💳</h2>
+        <p class="muted">Start free. Upgrade anytime as you grow.</p>
+      </div>
+    </div>
+
+    <div class="grid pricing">
+      <div class="card plan" *ngFor="let p of plans" [class.highlight]="p.highlight">
+        <div class="plan-top">
+          <div class="plan-name">
+            {{ p.name }}
+            <span class="plan-badge" *ngIf="p.badge">{{ p.badge }}</span>
+          </div>
+          <div class="plan-price">{{ p.price }}</div>
+          <div class="muted">{{ p.note }}</div>
+        </div>
+
+        <ul class="plan-features">
+          <li class="feat" *ngFor="let f of p.features">✨ {{ f }}</li>
+        </ul>
+
+        <button class="btn primary" *ngIf="p.highlight">Choose Pro ⭐</button>
+        <button class="btn outline" *ngIf="!p.highlight">Choose {{ p.name }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
 <section class="section alt">
   <div class="wrap">
-    <h2>Frequently Asked Questions</h2>
+    <div class="section-head">
+      <div>
+        <h2>FAQ ❓</h2>
+        <p class="muted">Quick answers to common questions.</p>
+      </div>
+    </div>
+
     <div class="faq">
-      <div class="faq-item" *ngFor="let f of faqs">
-        <h4>{{ f.q }}</h4>
-        <p>{{ f.a }}</p>
+      <div class="faq-item" *ngFor="let f of faqs; let i = index">
+        <button class="faq-q" (click)="toggleFAQ(i)">
+          <span>{{ f.q }}</span>
+          <span class="chev">{{ openFAQIndex===i ? '−' : '+' }}</span>
+        </button>
+        <div class="faq-a" *ngIf="openFAQIndex===i">{{ f.a }}</div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap center">
-    <h2>Start Your Learning Journey Today 🚀</h2>
-    <p>Join thousands of students building their future with LearnSkills.</p>
-    <button class="btn primary">Enroll Now</button>
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Contact & Guidance 💬</h2>
+      <p class="muted">We’ll help you choose the best course for your goals.</p>
+
+      <div class="contact-box">
+        <div>📧 Email: <b>support@learnskills.com</b></div>
+        <div>📱 WhatsApp: <b>+92-XXX-XXXXXXX</b></div>
+        <div>📍 Location: <b>Pakistan</b></div>
+      </div>
+
+      <div class="note">
+        ✅ Tip: Add your real WhatsApp number and email here before sharing your site.
+      </div>
+    </div>
+
+    <div class="cta-card">
+      <div class="cta-title">Ready to start? 🚀</div>
+      <div class="muted">Pick a track and start building your portfolio today.</div>
+      <button class="btn primary" (click)="scrollTo('courses')">Start Learning 📚</button>
+      <div class="small muted">Updated weekly • Mentor support available</div>
+    </div>
   </div>
 </section>
